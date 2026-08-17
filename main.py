@@ -21,7 +21,7 @@ def pedir_palpite(limite):
         print(f"Digite um número inteiro entre 1 e {limite}.")
 
 
-def jogar():
+def jogar(recorde):
     limite = 20
     tentativas = 5
     segredo = random.randint(1, limite)
@@ -39,18 +39,27 @@ def jogar():
         if palpite == segredo:
             pontos = (tentativas - rodada + 1) * 100
             print(f"Você encontrou o tesouro! Pontuação: {pontos} pontos.")
-            return
+            if pontos > recorde:
+                recorde = pontos
+                print("Novo recorde da sessão!")
+            print(f"Recorde atual: {recorde} pontos.")
+            return recorde
         if palpite < segredo:
             print("Pista: o tesouro está em uma casa maior.")
         else:
             print("Pista: o tesouro está em uma casa menor.")
 
     print(f"\nFim de jogo. O tesouro estava na casa {segredo}.")
+    print(f"Recorde atual: {recorde} pontos.")
+    return recorde
 
 
 def main():
+    recorde = 0
     while True:
-        jogar()
+        resultado = jogar(recorde)
+        if resultado is not None:
+            recorde = resultado
         novamente = input("\nJogar novamente? (s/n): ").strip().lower()
         if novamente != "s":
             print("Até a próxima!")
