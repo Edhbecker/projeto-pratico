@@ -21,12 +21,26 @@ def pedir_palpite(limite):
         print(f"Digite um número inteiro entre 1 e {limite}.")
 
 
+def escolher_dificuldade():
+    opcoes = {
+        "1": (10, 6, "Fácil"),
+        "2": (20, 5, "Normal"),
+        "3": (50, 4, "Difícil"),
+    }
+    print("\nDificuldade: 1 - Fácil | 2 - Normal | 3 - Difícil")
+    while True:
+        escolha = input("Escolha uma dificuldade: ").strip()
+        if escolha in opcoes:
+            return opcoes[escolha]
+        print("Escolha 1, 2 ou 3.")
+
+
 def jogar(recorde):
-    limite = 20
-    tentativas = 5
+    limite, tentativas, dificuldade = escolher_dificuldade()
     segredo = random.randint(1, limite)
 
     print("\n=== CAÇA AO TESOURO ===")
+    print(f"Dificuldade: {dificuldade}")
     print(f"O tesouro está escondido em uma casa de 1 a {limite}.")
 
     for rodada in range(1, tentativas + 1):
